@@ -16,7 +16,7 @@ public class AutorServicio {
     }
 
     public void crear() {
-        
+        System.out.println("Hola mundo");
     }
 
     public void modificar() {
