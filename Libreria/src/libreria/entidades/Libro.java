@@ -1,30 +1,42 @@
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package libreria.entidades;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
+/**
+ *
+ * @author roser
+ */
 @Entity
 public class Libro implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     @Id
-    private long isbn;
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer isbn;
     private String titulo;
     private Integer anio;
     private Integer ejemplares;
     private Integer ejemplaresPrestados;
     private Integer ejemplaresResantes;
     private boolean alta;
-    @OneToOne
+    @ManyToOne
     private Autor autor;
-    @OneToOne
+    @ManyToOne
     private Editorial editorial;
 
     public Libro() {
     }
 
-    public Libro(long isbn, String titulo, Integer anio, Integer ejemplares, Integer ejemplaresPrestados, Integer ejemplaresResantes, boolean alta, Autor autor, Editorial editorial) {
+    public Libro(Integer isbn, String titulo, Integer anio, Integer ejemplares, Integer ejemplaresPrestados, Integer ejemplaresResantes, boolean alta, Autor autor, Editorial editorial) {
         this.isbn = isbn;
         this.titulo = titulo;
         this.anio = anio;
@@ -36,11 +48,19 @@ public class Libro implements Serializable {
         this.editorial = editorial;
     }
 
-    public long getIsbn() {
+    public Integer getId() {
         return isbn;
     }
 
-    public void setIsbn(long isbn) {
+    public void setId(Integer id) {
+        this.isbn = id;
+    }
+
+    public Integer getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(Integer isbn) {
         this.isbn = isbn;
     }
 
@@ -108,4 +128,35 @@ public class Libro implements Serializable {
         this.editorial = editorial;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (isbn != null ? isbn.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Libro)) {
+            return false;
+        }
+        Libro other = (Libro) object;
+        if ((this.isbn == null && other.isbn != null) || (this.isbn != null && !this.isbn.equals(other.isbn))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Libro{" + "isbn=" + isbn
+                + ", titulo=" + titulo
+                + ", anio=" + anio
+                + ", ejemplares=" + ejemplares
+                + ", ejemplaresPrestados=" + ejemplaresPrestados
+                + ", ejemplaresResantes=" + ejemplaresResantes
+                + ", alta=" + alta + ", autor=" + autor
+                + ", editorial=" + editorial + '}';
+    }
 }
